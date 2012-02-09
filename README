@@ -1,13 +1,6 @@
-# pick-winners
-
-FIXME: write description
-
-## Usage
-
-FIXME: write
+# Lotterij --  a lottery picker application
 
 ## License
 
-Copyright (C) 2012 FIXME
-
+Copyright (C) 2012 Amsterdam Clojurians
 Distributed under the Eclipse Public License, the same as Clojure.

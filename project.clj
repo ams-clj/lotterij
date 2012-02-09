@@ -1,4 +1,13 @@
 (defproject lotterij "1.0.0-SNAPSHOT"
   :description "Run fair lottery picks and publish results"
   :dependencies [[org.clojure/clojure "1.3.0"]
-                 [ring/ring-jetty-adapter "1.0.1"]])
+                 [ring/ring-jetty-adapter "1.0.1"]
+                 [clj-redis "0.0.12"]])
+
+(def config
+  {:url (System/getenv "REDISTOGO_URL")})
+
+(def db (redis/init config))
+
+(defn read [^String key]
+  (redis/get db key))

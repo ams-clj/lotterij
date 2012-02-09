@@ -1,6 +1,7 @@
 (ns lotterij
   (:use [clojure.test]
-        lotterij.publish))
+        lotterij.publish
+        lotterij.store))
 
 (defn random-pick [v]
   (v (int (rand (count v)))))
@@ -31,6 +32,10 @@
     (if (> max  (count winners))
       (recur (conj winners (random-pick names)))
       winners)))
+
+(defn val []
+  (let [oldval (or (read "removeme") 0)]
+    (write (inc oldval))))
 
 (defn -main []
   (let [eligibles ["carlo" "hubert" "gijs" "pepijn" "remco" "joost"

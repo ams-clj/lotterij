@@ -10,3 +10,16 @@
 
 (defn write [k v]
   (redis/set db k v))
+
+(defn encode [s]
+  (str s))
+
+(defn decode [s]
+  (read-string s))
+
+(defn get-winners []
+  (when-let [winners (read "lotterij-winners")]
+    (decode winners)))
+
+(defn set-winners [winners]
+  (write "lotterij-winners" (encode winners)))

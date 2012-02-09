@@ -1,14 +1,12 @@
 (ns lotterij.web
   (:use ring.adapter.jetty)
-  (:require [lotterij :as l]))
-
-(def sample-eligible
-  ["carlo" "hubert" "coen" "gijs" "pepijn" "remco" "joost" "peter" "cees" "walter"])
+  (:require [lotterij :as l]
+            [lotterij.store :as s]))
 
 (defn output []
-  (str (l/pick-winners sample-eligible 3)
-       "\n"
-       (l/val)))
+  (if-let [winners (s/get-winners)]
+    (str winners)
+    "No winners yet, come along later on"))
 
 (defn app [req]
   {:status 200

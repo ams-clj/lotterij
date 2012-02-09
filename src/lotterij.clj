@@ -1,7 +1,7 @@
 (ns lotterij
   (:use [clojure.test]
-        lotterij.publish
-        lotterij.store))
+        lotterij.publish)
+  (:require [lotterij.store :as s]))
 
 (defn random-pick [v]
   (v (int (rand (count v)))))
@@ -34,10 +34,7 @@
       winners)))
 
 (defn val []
-  (let [oldval (or (read "removeme") 0)]
-    (write (inc oldval))))
-
-(defn -main []
-  (let [eligibles ["carlo" "hubert" "gijs" "pepijn" "remco" "joost"
-                   "peter" "thomas" "vijay" "fizz" "buzz" "foobar"]]
-    (publish-results (pick-winners eligibles 3))))
+  (let [oldval (or (s/read "removeme") "0")
+        newval (str (inc (Integer. oldval)))]
+    (s/write "removeme" newval)
+    newval))
